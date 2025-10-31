@@ -3,15 +3,18 @@ Maximize battery life and efficiency on Fedora, This script automates the instal
 
 #  PwrOpt: Fedora Power Optimization Scripts 
 
-**PwrOpt** is interactive Bash scripts designed to maximize battery life on **Fedora**. It automates the installation and configuration of  **TLP** and **Powertop**.
-
+PwrOpt is a set of simple, interactive Bash scripts for Fedora users who want the longest possible battery life.It automatically installs and sets up.
 ##  Key Features
 
-  * **Maximized Endurance:** Installs and configures **TLP** , background power-saving policies.
-  * **Conflict-Free Setup:** Safely disables default `power-profiles-daemon` to ensure TLP has uninterrupted control.
-  * **Optional Powertop:** Offers to install **Powertop** for live power diagnostics and sets up a systemd service for automatic auto-tuning on every boot.
-  * **Custom Control:** Prompts you to manage services like `thermald` which can interfere with TLP's performance policies.
-  * **Full Reversibility:** Includes the **PwrOpt-Restore** to safely revert all changes.
+  - **Longer Battery Life:** Installs and sets up **TLP** to manage power settings silently in the background.
+    
+- **Smart Setup:** Automatically turns off Fedora's built-in power service (like `power-profiles-daemon` or `power-tune`) so TLP can work without any problems.
+    
+- **Optional Power Diagnostics:** You can choose to install **Powertop** for real-time power checks and set it up to auto-tune your system every time it starts.
+    
+- **Full Control:** The script asks if you want to disable the `thermald` service, which sometimes clashes with TLP.
+    
+- **Undo Anytime:** A separate **PwrOpt-Restore** script lets you go back to Fedora's original power settings safely and completely.
 
 -----
 
@@ -29,7 +32,7 @@ cd PwrOpt
 
 ### 2\. Run the Optimizer
 
-Execute the main setup script. **Administrative privileges (sudo) will be required.**
+Execute the main setup script. **You will need administrative privileges (sudo).**
 
 ```bash
 chmod +x power_optimizer.sh
@@ -40,9 +43,9 @@ chmod +x power_optimizer.sh
 
 -----
 
-##  Reverting Changes: PwrOpt-Restore Utility
+## Go Back to Default: The PwrOpt-Restore Utility
 
-If you need to revert to Fedora's default power configuration, use the restoration script.
+If you ever want to return to Fedora's standard power settings, just run the restore script.
 
 ### 1\. Run the Restore Script
 
@@ -51,13 +54,13 @@ chmod +x power_rest.sh
 ./power_rest.sh
 ```
 
-**Follow the prompts.** The script will safely:
+**Follow the prompts.** The script is smart—it checks your Fedora version and does the right thing::
 
-  * **Remove TLP** and its associated configuration.
-  * **Re-enable** the `power-profiles-daemon`.
-  * **Re-enable `thermald`**.
-  * Optionally **remove Powertop** and clean up its auto-tune service.
-
+  * It removes TLP and its configuration files.
+  * It automatically detects your Fedora version to restore the correct default power service.
+    It restores the older power-profiles-daemon for earlier Fedora versions or the newer power-tune service for recent Fedora releases.
+  * It re-enables thermald (if it was disabled).
+  * You can choose to remove Powertop and its boot service as well.
 -----
 
 ##  Configuration Summary
@@ -65,9 +68,9 @@ chmod +x power_rest.sh
 | Tool | Purpose | Status After Setup | Restoration Status |
 | :--- | :--- | :--- | :--- |
 | **TLP** | Background Power Management | **Enabled** | **Removed** |
-| **Powertop** | Diagnostics & Auto-Tuning | **Optional** (User Choice) | **Optional** (User Choice to Remove) |
-| `power-profiles-daemon` | Fedora Default Power Service | **Disabled/Masked** | **Unmasked/Enabled** |
-| `thermald` | CPU Thermal Control | **Optional** (User Choice) | **Enabled** |
+| **Powertop** | Diagnostics & Auto-Tuning | **Optional** (Your Choice) | Optional (Remove or Keep) |
+| Fedora Default Power Service | Default Power Profile Control | **Disabled/Stopped** | **Re-enabled** |
+| `thermald` | CPU Thermal Control | **Optional** (Your Choice) | **Re-enabled** |
 
 -----
 
