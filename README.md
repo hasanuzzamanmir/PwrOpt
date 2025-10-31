@@ -23,9 +23,7 @@ PwrOpt is a set of simple, interactive Bash scripts for Fedora users who want th
 ### 1\. Download
 
 Clone the repository or download the scripts:
-
 ```bash
-# Clone the repository
 git clone https://github.com/hasanuzzamanmir/PwrOpt.git
 cd PwrOpt
 ```
